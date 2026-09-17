@@ -1,0 +1,35 @@
+<UserControl x:Class="CompteurCarnet.MenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Background="{StaticResource BgBrush}">
+        <Grid Margin="40,60,40,40" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Compteur carnet"
+                       FontSize="28" FontWeight="Bold"
+                       Foreground="{StaticResource TextBrush}"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,60"/>
+
+            <Button x:Name="BtnListe" Grid.Row="1" Content="Liste des carnets"
+                    Style="{StaticResource MenuButton}"
+                    Background="{StaticResource BlueBrush}"
+                    Click="BtnListe_Click"/>
+
+            <Button x:Name="BtnTaches" Grid.Row="2" Content="Faire les tâches"
+                    Style="{StaticResource MenuButton}"
+                    Background="{StaticResource GreenBrush}"
+                    Click="BtnTaches_Click"/>
+
+            <Button x:Name="BtnHistorique" Grid.Row="3" Content="Historique"
+                    Style="{StaticResource MenuButton}"
+                    Background="{StaticResource PurpleBrush}"
+                    Click="BtnHistorique_Click"/>
+        </Grid>
+    </Grid>
+</UserControl>

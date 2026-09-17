@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>CompteurCarnet</RootNamespace>
+    <AssemblyName>CompteurCarnet</AssemblyName>
+    <Version>1.0.0</Version>
+    <Authors>Compteur Carnet</Authors>
+    <Product>Compteur Carnet</Product>
+  </PropertyGroup>
+
+</Project>

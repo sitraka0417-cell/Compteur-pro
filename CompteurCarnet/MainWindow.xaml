@@ -1,0 +1,10 @@
+<Window x:Class="CompteurCarnet.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Compteur carnet" Height="700" Width="480"
+        Background="{StaticResource BgBrush}"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <ContentControl x:Name="MainContent"/>
+    </Grid>
+</Window>
