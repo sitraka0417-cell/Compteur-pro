@@ -1,0 +1,66 @@
+name: Build Windows app
+
+on:
+  push:
+    branches: [ "main" ]
+    tags: [ "v*" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore CompteurCarnet.sln
+
+      - name: Build
+        run: dotnet build CompteurCarnet.sln -c Release --no-restore
+
+      - name: Publish self-contained single-file exe
+        run: >
+          dotnet publish CompteurCarnet/CompteurCarnet.csproj
+          -c Release
+          -r win-x64
+          --self-contained true
+          -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true
+          -o publish
+
+      - name: Upload build artifact (exe)
+        uses: actions/upload-artifact@v4
+        with:
+          name: CompteurCarnet-windows-exe
+          path: publish/CompteurCarnet.exe
+
+      - name: Build installer (Inno Setup)
+        run: |
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" "Installer\CompteurCarnet.iss"
+
+      - name: Upload build artifact (installer)
+        uses: actions/upload-artifact@v4
+        with:
+          name: CompteurCarnet-Setup
+          path: installer-output/CompteurCarnet-Setup.exe
+
+      - name: Create GitHub release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            publish/CompteurCarnet.exe
+            installer-output/CompteurCarnet-Setup.exe
+
